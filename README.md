@@ -1,40 +1,56 @@
-# DOCUARCH — Laravel + MySQL
+# DOCUARCH — Document Archiving System
 
-This is a Laravel application source package built from the DOCUARCH proposal. It contains the application files to copy into a fresh Laravel project.
+**Technology:** Laravel, PHP, MySQL, HTML, CSS, and JavaScript
 
-## Included scope
-- Three document types only: Letters, Clearance Forms, Reports
-- Independent numbering series: LTR-YYYY-0001, CLR-YYYY-0001, RPT-YYYY-0001
-- Role-based access: `admin`, `personnel`, `requester`
-- Document archive, search/filter, optional file attachment, archive history
-- Dashboard counts and date/type-filtered reports
-- Admin user management
+DOCUARCH is a web-based Document Archiving System designed to help offices organize, store, search, retrieve, and manage archived documents digitally.
 
-## 1. Requirements
-- PHP 8.2+
+## Main Features
+
+- Document archiving for Letters, Clearance Forms, and Reports
+- Automatic document numbering
+- Document search and filtering
+- Document information management
+- Optional digital file attachments
+- Archive history and activity logs
+- Dashboard statistics
+- Reports generation
+- User management
+- Role-based access control
+
+## Technology Requirements
+
+- PHP 8.2 or higher
 - Composer
-- MySQL / XAMPP
-- Node.js and npm (optional; this package uses plain CSS/JS)
-- VS Code
+- MySQL
+- XAMPP
+- Visual Studio Code
+- Git
 
-## 2. Create a fresh Laravel project
-Open VS Code terminal in the folder where you want the project:
+## Installation Guide
+
+### 1. Clone the repository
 
 ```bash
-composer create-project laravel/laravel docuarch
-cd docuarch
+git clone https://github.com/whzandro99/DOCUARCHH.git
+cd DOCUARCHH
 ```
 
-Copy the contents of this package's `app`, `bootstrap`, `database`, `public`, `resources`, and `routes` folders into the matching folders in the new `docuarch` project. Allow files to merge. Do not replace Laravel's `vendor` folder or `.env`.
+### 2. Install dependencies
 
-## 3. Configure MySQL
-Start Apache and MySQL in XAMPP. Create a database named `docuarch` in phpMyAdmin.
+```bash
+composer install
+```
 
-Edit `.env`:
+### 3. Configure environment
+
+Copy `.env.example` and rename the copy to `.env`.
+
+Configure your database settings:
 
 ```env
 APP_NAME=DOCUARCH
 APP_URL=http://127.0.0.1:8000
+
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -43,33 +59,50 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-## 4. Install and run
-In the Laravel project terminal:
+Create a MySQL database named `docuarch` using phpMyAdmin.
+
+### 4. Generate application key
 
 ```bash
 php artisan key:generate
-php artisan storage:link
+```
+
+### 5. Run migrations and seed the database
+
+```bash
 php artisan migrate --seed
+```
+
+### 6. Start the development server
+
+```bash
 php artisan serve
 ```
 
-Open http://127.0.0.1:8000
+Open http://127.0.0.1:8000 in your browser.
 
-## 5. Demo accounts
-The seeder creates:
-- Admin: `admin@docuarch.test` / `password`
-- Office Personnel: `personnel@docuarch.test` / `password`
-- Requesting User: `requester@docuarch.test` / `password`
+## Demo Accounts
 
-Change these passwords before using real records. This starter uses demo credentials for classroom testing only.
+| Role | Email | Password |
+|---|---|---|
+| Administrator | admin@docuarch.test | password |
+| Office Personnel | personnel@docuarch.test | password |
+| Requesting User | requester@docuarch.test | password |
 
-## 6. Roles
-- **Administrator:** dashboard, all documents, archive history, reports, and user management.
-- **Office Personnel:** dashboard, create/edit/archive/search documents and view reports/history.
-- **Requesting User:** read-only access to the document list and document details.
+These are demonstration credentials for classroom testing. Change them before using real records.
 
-## 7. Notes
-- Laravel's actual home page is `resources/views/dashboard.blade.php`; `public/index.html` is a static HTML reference page only.
-- Document attachments are stored under `storage/app/public/documents`. Use `php artisan storage:link` so they can be accessed through `public/storage`.
-- The system stores document information and optional digital copies. It does not physically store paper documents, automatically approve records, or connect to external school systems, matching the limitations in the proposal.
-- The migration files create the MySQL tables. `database/docuarch_schema.sql` is also included as a reference schema; use migrations as the normal setup method, not both.
+## Document Numbering
+
+- Letters: `LTR-YYYY-0001`
+- Clearance Forms: `CLR-YYYY-0001`
+- Reports: `RPT-YYYY-0001`
+
+Each document type has an independent numbering series.
+
+## Project Scope
+
+DOCUARCH focuses on digital document archiving, organization, retrieval, and archive management. It is not a document routing or approval workflow system.
+
+---
+
+**DOCUARCH — Making Document Archiving More Organized and Accessible.**
