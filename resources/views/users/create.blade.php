@@ -1,0 +1,8 @@
+@extends('layouts.app')
+@section('title','Add user')
+@section('heading','Add user account')
+@section('content')
+<div class="form-panel"><div class="form-intro"><h2>Create an authorized account</h2><p class="muted">Assign the appropriate role based on the user's responsibilities.</p></div><form method="POST" action="{{ route('users.store') }}">@csrf
+<div class="form-grid"><div class="field"><label>Full name *</label><input name="name" value="{{ old('name',$user->name) }}" required></div><div class="field"><label>Email *</label><input type="email" name="email" value="{{ old('email',$user->email) }}" required></div><div class="field"><label>Role *</label><select name="role" required><option value="admin" @selected(old('role',$user->role)==='admin')>Administrator</option><option value="personnel" @selected(old('role',$user->role)==='personnel')>Office Personnel</option><option value="requester" @selected(old('role',$user->role)==='requester')>Requesting User</option></select></div><div class="field"><label>Office</label><input name="office" value="{{ old('office',$user->office) }}" placeholder="Office or department"></div><div class="field"><label>Password {{ $user->exists ? '(leave blank to keep current)' : '*' }}</label><input type="password" name="password" {{ $user->exists ? '' : 'required' }} minlength="8"></div><div class="field"><label>Confirm password</label><input type="password" name="password_confirmation" {{ $user->exists ? '' : 'required' }} minlength="8"></div></div>
+<div class="form-actions"><a class="btn light" href="{{ route('users.index') }}">Cancel</a><button class="btn primary">Create account</button></div></form></div>
+@endsection
